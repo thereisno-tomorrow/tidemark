@@ -58,20 +58,20 @@ Captured result:
 
 The starter includes an executable formatter and an agent tool list, so the combined plan requires control confirmation. The ID identifies this recorded plan. It does not identify who confirms it.
 
-The generated `plan.json` contains these ten operations. This table selects the artifact, provider, operation type and target directly from that file; hashes and the remaining plan fields are omitted.
+The generated `plan.json` contains these ten operations. This table selects the artifact, provider, operation type and target directly from that file. Targets are shown relative to the demo directory; hashes and the remaining plan fields are omitted.
 
 | Artifact | Provider | Operation | Target |
 | --- | --- | --- | --- |
-| `agents.example-reviewer` | claude | `replace-file` | `<demo>/home/.claude/agents/example-reviewer.md` |
-| `agents.example-reviewer` | codex | `replace-file` | `<demo>/home/.codex/agents/example-reviewer.toml` |
-| `instructions.global` | claude | `replace-file` | `<demo>/home/.claude/CLAUDE.md` |
-| `instructions.global` | codex | `replace-file` | `<demo>/home/.codex/AGENTS.md` |
-| `skills.example-checklist` | claude | `ensure-link` | `<demo>/home/.claude/skills/example-checklist` |
-| `skills.example-checklist` | codex | `ensure-link` | `<demo>/home/.agents/skills/example-checklist` |
-| `skills.example-formatter` | claude | `ensure-link` | `<demo>/home/.claude/skills/example-formatter` |
-| `skills.example-formatter` | codex | `ensure-link` | `<demo>/home/.agents/skills/example-formatter` |
-| `skills.example-notes` | claude | `ensure-link` | `<demo>/home/.claude/skills/example-notes` |
-| `skills.example-notes` | codex | `ensure-link` | `<demo>/home/.agents/skills/example-notes` |
+| `agents.example-reviewer` | claude | `replace-file` | `home/.claude/agents/example-reviewer.md` |
+| `agents.example-reviewer` | codex | `replace-file` | `home/.codex/agents/example-reviewer.toml` |
+| `instructions.global` | claude | `replace-file` | `home/.claude/CLAUDE.md` |
+| `instructions.global` | codex | `replace-file` | `home/.codex/AGENTS.md` |
+| `skills.example-checklist` | claude | `ensure-link` | `home/.claude/skills/example-checklist` |
+| `skills.example-checklist` | codex | `ensure-link` | `home/.agents/skills/example-checklist` |
+| `skills.example-formatter` | claude | `ensure-link` | `home/.claude/skills/example-formatter` |
+| `skills.example-formatter` | codex | `ensure-link` | `home/.agents/skills/example-formatter` |
+| `skills.example-notes` | claude | `ensure-link` | `home/.claude/skills/example-notes` |
+| `skills.example-notes` | codex | `ensure-link` | `home/.agents/skills/example-notes` |
 
 Every target was absent in this run. The plan therefore proposes new files and links under the temporary profile. Each shared artifact has a target in both assistants' native directory layouts.
 
