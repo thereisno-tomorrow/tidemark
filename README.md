@@ -4,6 +4,8 @@
 
 Tidemark manages personal Claude Code and Codex configuration on Windows: instructions, skills, agents, scripts, hooks and settings. It keeps editable source separate from installed snapshots, plans updates before applying them, and backs up what they replace.
 
+I built Tidemark to maintain my own Claude Code and Codex setup. This repository shares the controller, its design decisions and a starter configuration.
+
 [How it works](#what-it-does) · [Try it](#quickstart) · [Scope and limits](#scope-and-limits)
 
 ## Your setup gets better, one change at a time
@@ -85,12 +87,25 @@ These named tests passed on Windows with Node 24.20.0: 127 passed, 0 failed, 0 s
 
 ## Quickstart
 
-The starter provides three example skills, a reviewer agent, instructions and empty provider settings. It lets you inspect a proposed installation before adapting the configuration to your own setup.
+Try a proposed installation in a temporary folder. You need Node 22 or newer and Git. From this checkout, run:
 
-You need Node 22 or newer and Git. Start with the throwaway environment below. The walkthrough covers preparation, validation, planning, installation, a check and rollback.
+```powershell
+$env:AGENT_CONFIG_DEMO_ROOT = Join-Path $env:TEMP ('tidemark-demo-' + [guid]::NewGuid())
+node scripts/starter-demo.mjs prepare
+node scripts/starter-demo.mjs validate
+node scripts/starter-demo.mjs plan
+```
+
+The launcher prepares a temporary Git repository, validates the starter and writes `plan.json`. The Claude and Codex targets in that plan point inside the demo folder. These commands stop at the plan; they do not apply it.
+
+Look for five artifacts: three example skills, a reviewer agent and shared instructions. The plan shows `control-confirm` because the starter includes a script and an agent tool list. Open the printed `planPath` to see the target files and their before-and-after descriptions.
+
+You can also [read the captured output](docs/demo.md). It shows the validation result, the confirmation requirement and the ten proposed operations.
+
+To try installation, checking and rollback, follow the full walkthrough below. It starts a separate demo in a new PowerShell session.
 
 <details>
-<summary>PowerShell setup and walkthrough</summary>
+<summary>Full isolated installation and rollback walkthrough</summary>
 
 Use a new PowerShell session in this checkout. Set a throwaway HOME and the remaining paths before running anything. Keep the same session for the examples. This changes this process's environment, not persistent Windows settings.
 

@@ -1,9 +1,10 @@
 # Tidemark documentation
 
-Tidemark grew out of a personal setup for using Claude Code and Codex together. The [README](../README.md) explains the current controller and provides a starter walkthrough. These documents cover the decisions behind it and how the implementation was checked.
+I built Tidemark to maintain my own Claude Code and Codex setup. The [README](../README.md) explains the current controller and provides a short demo. These documents cover the decisions behind it and how the implementation was checked.
 
 | Question | Read |
 | --- | --- |
+| What does the short demo produce? | [Captured demo output](demo.md) |
 | Why does a shared setup need more than a central folder? | [Design history](design-history.md#an-ordinary-request-should-reach-the-shared-source) |
 | Which responsibilities belong in a reusable capability? | [Keeping shared capabilities reusable](design-history.md#keep-shared-capabilities-reusable) |
 | Why does recovery return a preview before changing anything? | [Inspect recovery before applying it](design-history.md#inspect-recovery-before-applying-it) |
