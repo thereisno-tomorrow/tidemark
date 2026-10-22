@@ -191,6 +191,12 @@ Node 22 or newer and Git. On Windows, directories link with junctions. File-link
 
 </details>
 
+## Read more
+
+- [Design history](docs/design-history.md): ordinary requests, shared capability boundaries and preview-only recovery.
+- [AI-assisted development](docs/development.md): import checks, output-format drift and the difference between a matching plan ID and a valid plan.
+- [Documentation index](docs/index.md): source, tests and the scope of the historical accounts.
+
 ## Other approaches
 
 Documentation review, 2026-10-22; these tools were not installed or compared by execution. Tidemark's scope is the tested local release, confirmation and recovery workflow above.
