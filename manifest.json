@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "deploymentBranch": "main",
+  "artifacts": [
+    {
+      "id": "bootstrap.agent-config-maintainer",
+      "kind": "skill",
+      "ownership": "shared-link",
+      "risk": "control-confirm",
+      "source": [
+        "bootstrap/agent-config-maintainer"
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/agent-config-maintainer",
+        "codex": "${USER_HOME}/.agents/skills/agent-config-maintainer"
+      },
+      "validators": [
+        "skill",
+        "no-secrets"
+      ]
+    },
+    {
+      "id": "instructions.global",
+      "kind": "instructions",
+      "ownership": "shared-generated",
+      "risk": "content-auto",
+      "source": [
+        "contracts/example-rules.md",
+        "instructions/global.md",
+        "automation/controller-routing.md",
+        "providers/claude/instructions.append.md",
+        "providers/codex/instructions.append.md"
+      ],
+      "outputs": {
+        "claude": "dist/claude/CLAUDE.md",
+        "codex": "dist/codex/AGENTS.md"
+      },
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/CLAUDE.md",
+        "codex": "${USER_HOME}/.codex/AGENTS.md"
+      },
+      "validators": [
+        "no-secrets"
+      ]
+    }
+  ],
+  "namespaces": [
+    {
+      "id": "portable-skill",
+      "artifactId": "skills.<skill-id>",
+      "kind": "skill",
+      "match": "skills/<skill-id>",
+      "ownership": "shared-link",
+      "risk": "content-auto",
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "platforms": [
+        "windows"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/<skill-id>",
+        "codex": "${USER_HOME}/.agents/skills/<skill-id>"
+      },
+      "validators": [
+        "skill",
+        "no-secrets",
+        "no-machine-paths"
+      ],
+      "allowedInitialFiles": [
+        "SKILL.md",
+        "agents/**",
+        "assets/**",
+        "references/**"
+      ],
+      "deniedFiles": [
+        "scripts/**"
+      ]
+    }
+  ]
+}

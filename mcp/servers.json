@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "servers": [
+    {
+      "id": "agent_config",
+      "transport": "stdio",
+      "command": "node",
+      "args": [
+        "${AGENT_CONFIG_STATE_ROOT}/controller/v0.1.0/scripts/agent-config-controller.mjs"
+      ],
+      "environment": {
+        "AGENT_CONFIG_ROOT": "${AGENT_CONFIG_ROOT}"
+      },
+      "providers": [
+        "codex"
+      ]
+    },
+    {
+      "id": "example",
+      "transport": "http",
+      "url": "https://example.invalid/mcp",
+      "providers": [
+        "codex"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "tidemark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Release engine for Claude Code and Codex configuration: backups, rollback, drift checks",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "tidemark": "scripts/agent-config.mjs",
+    "agent-config": "scripts/agent-config.mjs",
+    "agent-config-controller": "scripts/agent-config-controller.mjs"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1",
+    "validate": "node scripts/agent-config.mjs validate",
+    "check": "node scripts/agent-config.mjs check"
+  }
+}

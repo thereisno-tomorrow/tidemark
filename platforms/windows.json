@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "platform": "windows",
+  "skillLink": "junction",
+  "supportsAtomicActiveSwitch": false,
+  "pathSeparator": "\\"
+}

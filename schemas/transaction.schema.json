@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "transactionId", "phase", "artifact", "base", "allowedPaths", "authorization"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "transactionId": {"type": "string"},
+    "phase": {"enum": ["open", "patched", "tested", "planned", "awaiting-confirmation", "applying", "verified-provisional", "active", "active-local", "failed", "rollback-conflict", "aborted"]},
+    "artifact": {"type": "object"},
+    "base": {"type": "object"},
+    "allowedPaths": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "authorization": {"type": "object"},
+    "changes": {"type": "array", "items": {"type": "object"}},
+    "receipts": {"type": "array", "items": {"type": "object"}},
+    "planPath": {"type": ["string", "null"]},
+    "blocker": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,23 @@
+# The repository is an authoring surface only. Runtime and materialized state
+# are denied by default and must never be committed.
+dist/
+.state/
+.local/
+node_modules/
+*.log
+*.tmp
+*.bak
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+authorization*.json
+!schemas/authorization.schema.json
+test-results.json
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

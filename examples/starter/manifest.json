@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "deploymentBranch": "main",
+  "artifacts": [
+    {
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "validators": [
+        "skill",
+        "no-secrets",
+        "no-machine-paths"
+      ],
+      "id": "skills.example-notes",
+      "kind": "skill",
+      "ownership": "shared-link",
+      "risk": "content-auto",
+      "source": [
+        "skills/example-notes"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/example-notes",
+        "codex": "${USER_HOME}/.agents/skills/example-notes"
+      }
+    },
+    {
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "validators": [
+        "skill",
+        "no-secrets",
+        "no-machine-paths"
+      ],
+      "id": "skills.example-checklist",
+      "kind": "skill",
+      "ownership": "shared-link",
+      "risk": "content-auto",
+      "source": [
+        "skills/example-checklist"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/example-checklist",
+        "codex": "${USER_HOME}/.agents/skills/example-checklist"
+      }
+    },
+    {
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "validators": [
+        "skill",
+        "no-secrets",
+        "no-machine-paths"
+      ],
+      "id": "skills.example-formatter",
+      "kind": "skill",
+      "ownership": "shared-link",
+      "risk": "control-confirm",
+      "source": [
+        "skills/example-formatter"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/example-formatter",
+        "codex": "${USER_HOME}/.agents/skills/example-formatter"
+      }
+    },
+    {
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "validators": [
+        "no-secrets"
+      ],
+      "id": "agents.example-reviewer",
+      "kind": "custom-agent",
+      "ownership": "shared-generated",
+      "risk": "control-confirm",
+      "source": [
+        "agents/example-reviewer"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/agents/example-reviewer.md",
+        "codex": "${USER_HOME}/.codex/agents/example-reviewer.toml"
+      }
+    },
+    {
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "validators": [
+        "no-secrets"
+      ],
+      "id": "instructions.global",
+      "kind": "instructions",
+      "ownership": "shared-generated",
+      "risk": "content-auto",
+      "source": [
+        "instructions/global.md",
+        "providers/claude/instructions.append.md",
+        "providers/codex/instructions.append.md"
+      ],
+      "outputs": {
+        "claude": "dist/claude/CLAUDE.md",
+        "codex": "dist/codex/AGENTS.md"
+      },
+      "targets": {
+        "claude": "${USER_HOME}/.claude/CLAUDE.md",
+        "codex": "${USER_HOME}/.codex/AGENTS.md"
+      }
+    }
+  ],
+  "namespaces": []
+}

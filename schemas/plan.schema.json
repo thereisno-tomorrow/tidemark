@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "planId", "toolVersion", "createdAt", "source", "platform", "policyDigest", "risk", "operations", "backupScope", "release"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "planId": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "toolVersion": {"type": "string"},
+    "createdAt": {"type": "string"},
+    "source": {"type": "object"},
+    "platform": {"enum": ["windows", "macos"]},
+    "policyDigest": {"type": "string"},
+    "risk": {"enum": ["content-auto", "control-confirm"]},
+    "authorization": {"type": ["object", "null"]},
+    "operations": {"type": "array", "items": {"type": "object"}},
+    "backupScope": {"type": "array", "items": {"type": "string"}},
+    "release": {"type": "object"},
+    "receipts": {"type": "array", "items": {"type": "object"}},
+    "confirmation": {"type": "object"}
+  }
+}

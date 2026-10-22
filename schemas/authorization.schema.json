@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "authorizationId", "provider", "originAssurance", "artifactId", "scope", "requestDigest", "createdAt", "status"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "authorizationId": {"type": "string"},
+    "provider": {"enum": ["claude", "codex", "manual"]},
+    "originAssurance": {"enum": ["attested", "trusted-local-token", "provider-context"]},
+    "artifactId": {"type": "string"},
+    "scope": {"enum": ["local-only", "trusted-sync"]},
+    "requestDigest": {"type": "string"},
+    "issuerDigest": {"type": ["string", "null"]},
+    "tokenNonceDigest": {"type": ["string", "null"]},
+    "createdAt": {"type": "string"},
+    "expiresAt": {"type": ["string", "null"]},
+    "status": {"enum": ["pending", "consumed", "revoked", "expired"]}
+  }
+}

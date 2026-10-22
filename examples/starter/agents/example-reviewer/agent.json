@@ -1,0 +1,19 @@
+{
+  "name": "example-reviewer",
+  "description": "Review supplied changes and report concrete issues.",
+  "providers": [
+    "claude",
+    "codex"
+  ],
+  "claude": {
+    "model": "sonnet",
+    "tools": [
+      "Read",
+      "Grep",
+      "Glob"
+    ]
+  },
+  "codex": {
+    "sandbox_mode": "read-only"
+  }
+}

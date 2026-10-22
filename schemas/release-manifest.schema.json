@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "releaseId", "sourceCommit", "sourceTreeDigest", "generatorVersion", "files"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "releaseId": {"type": "string"},
+    "sourceCommit": {"type": "string"},
+    "sourceTreeDigest": {"type": "string"},
+    "generatorVersion": {"type": "string"},
+    "files": {"type": "array", "items": {"type": "object"}}
+  }
+}

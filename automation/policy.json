@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "strictOrigin": true,
+  "zeroConfirmationProviders": [],
+  "token": {
+    "maxTtlSeconds": 300,
+    "allowedScopes": [
+      "local-only",
+      "trusted-sync"
+    ],
+    "clockSkewSeconds": 15
+  },
+  "contentAuto": {
+    "allowedExtensions": [
+      ".md",
+      ".txt",
+      ".json",
+      ".yaml",
+      ".yml",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".svg"
+    ],
+    "deniedBasenames": [
+      "manifest.json",
+      "manifest.lock.json",
+      "policy.json",
+      "routing.json",
+      "trusted-remotes.json",
+      "trusted-signers"
+    ],
+    "deniedPathPrefixes": [
+      "scripts/",
+      "automation/",
+      "schemas/",
+      "tests/",
+      "hooks/",
+      "mcp/",
+      "bootstrap/"
+    ],
+    "deniedFrontmatterKeys": [
+      "allowed-tools",
+      "tools",
+      "mcp",
+      "permissions",
+      "sandbox",
+      "command",
+      "hooks"
+    ]
+  },
+  "limits": {
+    "readBytes": 1048576,
+    "patchBytes": 262144,
+    "transactionBytes": 4194304,
+    "validatorTimeoutMs": 30000,
+    "lockStaleMs": 900000
+  }
+}

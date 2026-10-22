@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "aliases": {
+    "global instructions": "instructions.global",
+    "agent config maintainer": "bootstrap.agent-config-maintainer"
+  },
+  "projectRepositories": []
+}

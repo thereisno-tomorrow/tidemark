@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "strictOrigin", "token", "contentAuto", "limits"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schemaVersion": {"const": 1},
+    "strictOrigin": {"type": "boolean"},
+    "zeroConfirmationProviders": {"type": "array", "items": {"enum": ["claude", "codex"]}},
+    "token": {"type": "object"},
+    "contentAuto": {"type": "object"},
+    "limits": {"type": "object"}
+  }
+}

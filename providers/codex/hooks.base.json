@@ -1,0 +1,25 @@
+{
+  "description": "Example managed hooks",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node --version"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node --version"
+          }
+        ]
+      }
+    ]
+  }
+}

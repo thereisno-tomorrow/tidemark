@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "enabled": false,
+  "description": "Experimental sync is disabled and excluded from v1 claims.",
+  "remotes": [],
+  "ciAttestation": {
+    "required": true,
+    "maxAgeSeconds": 86400,
+    "issuers": []
+  }
+}

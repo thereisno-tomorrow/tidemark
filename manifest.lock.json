@@ -1,0 +1,63 @@
+{
+  "$schema": "./schemas/manifest-lock.schema.json",
+  "artifacts": [
+    {
+      "dependencies": [],
+      "id": "bootstrap.agent-config-maintainer",
+      "kind": "skill",
+      "namespaceId": null,
+      "ownership": "shared-link",
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "risk": "control-confirm",
+      "source": [
+        "bootstrap/agent-config-maintainer"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/skills/agent-config-maintainer",
+        "codex": "${USER_HOME}/.agents/skills/agent-config-maintainer"
+      },
+      "validators": [
+        "skill",
+        "no-secrets"
+      ]
+    },
+    {
+      "dependencies": [],
+      "id": "instructions.global",
+      "kind": "instructions",
+      "namespaceId": null,
+      "ownership": "shared-generated",
+      "platforms": [
+        "windows"
+      ],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "risk": "content-auto",
+      "source": [
+        "contracts/example-rules.md",
+        "instructions/global.md",
+        "automation/controller-routing.md",
+        "providers/claude/instructions.append.md",
+        "providers/codex/instructions.append.md"
+      ],
+      "targets": {
+        "claude": "${USER_HOME}/.claude/CLAUDE.md",
+        "codex": "${USER_HOME}/.codex/AGENTS.md"
+      },
+      "validators": [
+        "no-secrets"
+      ]
+    }
+  ],
+  "generatedBy": "agent-config validate --write-lock",
+  "manifestDigest": "sha256:20ac5d55df7cfb1579d4aa9a8b659e2ed13a396fcfd014ef16ffb0ad6f868983",
+  "schemaVersion": 1
+}

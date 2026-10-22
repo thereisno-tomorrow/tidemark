@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-config://schemas/manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "deploymentBranch",
+    "artifacts",
+    "namespaces"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "deploymentBranch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "namespaces": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/namespace"
+      }
+    },
+    "presets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "ownership": {
+      "enum": [
+        "shared-link",
+        "shared-copy",
+        "shared-generated",
+        "provider-only",
+        "platform-overlay",
+        "project-owned",
+        "external-managed",
+        "runtime-excluded",
+        "archived",
+        "foreign-owned"
+      ]
+    },
+    "risk": {
+      "enum": [
+        "content-auto",
+        "control-confirm",
+        "not-deployable"
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "source",
+        "ownership",
+        "risk",
+        "providers",
+        "platforms",
+        "validators"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "source": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ownership": {
+          "$ref": "#/$defs/ownership",
+          "description": "shared-link | shared-copy | shared-generated | provider-only | platform-overlay | foreign-owned. Use foreign-owned together with `upstream` when another governed repository owns the content and agent-config only distributes it."
+        },
+        "risk": {
+          "$ref": "#/$defs/risk"
+        },
+        "providers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "claude",
+              "codex"
+            ]
+          }
+        },
+        "platforms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "windows",
+              "macos"
+            ]
+          }
+        },
+        "validators": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "targets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "providerOnlyReason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outputs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "legacyTargets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "provider",
+              "path"
+            ]
+          }
+        },
+        "upstream": {
+          "type": "object",
+          "description": "Declares that this artifact is CANONICAL IN ANOTHER REPOSITORY and only vendored here for distribution. agent-config never owns the content; it delivers it. Divergence from upstream is a reportable defect, not an edit.",
+          "required": [
+            "repo",
+            "path",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "repo": {
+              "type": "string",
+              "description": "Path token to the owning repository, e.g. ${PROJECTS_ROOT}/example-upstream"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path of the canonical file inside that repository"
+            },
+            "ref": {
+              "type": "string",
+              "description": "Branch or tag that is authoritative upstream"
+            },
+            "vendoredFrom": {
+              "type": "string",
+              "description": "Upstream commit this copy was taken from, when known"
+            },
+            "reason": {
+              "type": "string",
+              "description": "Why this is owned upstream rather than here"
+            }
+          }
+        }
+      }
+    },
+    "namespace": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/artifact"
+        },
+        {
+          "type": "object",
+          "required": [
+            "match",
+            "artifactId",
+            "allowedInitialFiles",
+            "deniedFiles"
+          ],
+          "properties": {
+            "match": {
+              "type": "string"
+            },
+            "artifactId": {
+              "type": "string"
+            },
+            "allowedInitialFiles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deniedFiles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

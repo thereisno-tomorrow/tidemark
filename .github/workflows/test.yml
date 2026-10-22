@@ -1,0 +1,56 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Test and validate in a throwaway profile
+        shell: pwsh
+        env:
+          HOME: ${{ runner.temp }}/agent-config-test/home
+          USERPROFILE: ${{ runner.temp }}/agent-config-test/home
+          LOCALAPPDATA: ${{ runner.temp }}/agent-config-test/local
+          APPDATA: ${{ runner.temp }}/agent-config-test/roaming
+          PROJECTS_ROOT: ${{ runner.temp }}/agent-config-test/projects
+          AGENT_CONFIG_ROOT: ${{ runner.temp }}/agent-config-test/config
+          AGENT_CONFIG_STATE_ROOT: ${{ runner.temp }}/agent-config-test/state
+          TEMP: ${{ runner.temp }}/agent-config-test/tmp
+          TMP: ${{ runner.temp }}/agent-config-test/tmp
+          AGENT_CONFIG_DEMO_ROOT: ${{ runner.temp }}/agent-config-test/starter
+        run: |
+          foreach ($key in 'HOME','USERPROFILE','LOCALAPPDATA','APPDATA','PROJECTS_ROOT','AGENT_CONFIG_ROOT','AGENT_CONFIG_STATE_ROOT','TEMP','TMP') {
+            $value = [Environment]::GetEnvironmentVariable($key)
+            New-Item -ItemType Directory -Force -Path $value | Out-Null
+            Write-Output "$key=$value"
+          }
+          node --test --test-concurrency=1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/agent-config.mjs validate --root .
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/agent-config.mjs validate --root examples/starter
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/starter-demo.mjs prepare
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/starter-demo.mjs validate
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/starter-demo.mjs plan
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node scripts/check-claims.mjs
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
